@@ -3,9 +3,10 @@
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h> 
 
-const char* ssid = "TALKTALK03DAA2";
-const char* password = "ND6RBXY6";
-const char* host = "192.168.1.3";
+//wifi network and esp32 details
+const char* ssid = "PUT YOUR SSID HERE";
+const char* password = "PUT YOUR WIFI PASSWORD HERE";
+const char* host = "PUT YOUR ESP32 IP ADDRESS HERE";
 
 #define POTENTIOMETER_PIN A0
 int analogValue;
@@ -22,6 +23,7 @@ int btnRghtRead = 0;
 
 void setup() {
   Serial.begin(115200);
+  //connects to the wifi
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
@@ -43,16 +45,18 @@ void loop() {
 
   analogValue = analogRead(POTENTIOMETER_PIN);
   Serial.printf("Analog value: %04d\n", analogValue);
-
+  //creates link request with potentiometer value for ESP32
   String urlA = "/get?input1=" + String(analogValue);
   Serial.print("Requesting URL: ");
   Serial.println(urlA);
 
   WiFiClient client;
+  //checks for connection
   if (!client.connect(host, 80)) {
     Serial.println("Connection failed");
     return;
   }
+  //checks buttons, if ON sends a request to ESP32
    if (btnBkwdRead == LOW) {
     String urlB = "/get?input1=backwards";
     Serial.print("Requesting URL: ");
@@ -89,7 +93,7 @@ void loop() {
   
 
   
-
+  //sends link request
   client.print(String("GET ") + urlA + " HTTP/1.1\r\n" +
                "Host: " + host + "\r\n" +
                "Connection: close\r\n\r\n");
