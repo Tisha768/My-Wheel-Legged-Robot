@@ -1,3 +1,4 @@
 # My-Wheel-Legged-Robot
 This is my first "big" robotics project, it took me about a month in total and it is pretty much finished other than a few rough edges. I will include all my code and circuit diagrams here as well as a youtube video on it.
 This robot consists of 3 legs; 2 legs with 2 joints and a wheel on the bottom and 1 leg with one joint and a wheel on the bottom. The joints are MG966R or MG995 servo motors, and the wheels are normal yellow DC motors. All of this is attached to a base that can move up and down due to the legs. The ESP32 is the brains and controlls everything onboard. This is all being powered by a 12V LiPo battery that directly powers the wheels or goes through a voltage buck converter for 5V for the servos and ESP32. Since the voltage is getting bigger the current gets smaller so it is sufficient for the servos running strong.
+https://youtu.be/wy0Yug5ohUs
